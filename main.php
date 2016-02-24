@@ -12,7 +12,7 @@ include('session.php');
 </td></tr>
 <tr><td>
 <b>Welcome: <i><?php echo $login_session; ?></i></b>
-<b><a href="logout.php">Logout</a></b>
+<b><a href="http://127.0.0.1/logout.php">Logout</a></b>
 </td></tr>
 <tr>
 <td style="background-color:#eeeeee;">
