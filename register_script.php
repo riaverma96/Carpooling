@@ -12,16 +12,13 @@
 			$db = pg_connect("host=localhost port=5432 dbname=postgres user=postgres password=12345678") 
 			or die ('Could not connect: ' . pg_last_error());
 
-			$query = "SELECT name, password FROM users WHERE name = '$username' AND password = '$password'";
+			$query = "INSERT INTO users (name, password) VALUES ('$username','$password')";
 			$result = pg_query($query);
-			$row = pg_num_rows($result);
-			if ($row == 1) {
-				error_log("login_user has a value now");
-				$_SESSION['login_user'] = $username;
-				header("Location: http://127.0.0.1/main.php");
+			if (!$result) {
+				$error = "Invalid username/password";
+				echo $error;
 			} else {
-				$error = "Username or password is invalid";
-				header("Location: http://127.0.0.1/login.php/");
+				echo "User account created";
 			}
 			pg_close($db);
 		}

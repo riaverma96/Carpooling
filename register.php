@@ -1,5 +1,5 @@
 <?php
-include('authenticate.php'); // Includes authenticate Script
+include('register_script.php'); // Includes register Script
 
 if(isset($_SESSION['login_user'])){
 error_log("Already have login_user go to main.php");
@@ -9,20 +9,20 @@ header("Location: http://127.0.0.1/main.php");
 
 <html>
 	<head>
-		<title> Login </title>
+		<title> Register </title>
 	</head>
 
 	<body>
 		<div>
 			<!-- Login form -->
 			<form action="" method="post">
-			<label>Name:</label>
-			<input type="text" name="username" placeholder="Fill your name here" type="text">
-			<label>Password:</label>
+			<label>Desired Name:</label>
+			<input type="text" name="username" placeholder="Fill your desired username here" type="text">
+			<label>Desired Password:</label>
 			<input type="password" name="password" placeholder="************" type="password">
-			<input name="submit" type="submit" value="Login">
+			<input name="submit" type="submit" value="Register">
 			</form>
-			<a href="http://127.0.0.1/register.php">Register</a>
+			<a href="http://127.0.0.1/main.php">Back</a>
 		</div>
 
 	</body>
