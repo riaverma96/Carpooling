@@ -1,0 +1,11 @@
+*.png
+*.html
+
+# rubbish in the htdocs file #
+img/
+503.html
+applications.html
+index.html
+bitnami.css
+book.php
+favicon.ico
