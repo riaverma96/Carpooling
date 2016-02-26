@@ -9,8 +9,7 @@
 			$username = $_POST['username'];
 			$password = $_POST['password'];
 
-			$db = pg_connect("host=localhost port=5432 dbname=postgres user=postgres password=12345678") 
-			or die ('Could not connect: ' . pg_last_error());
+			$db = include 'postgresconnect.php';
 
 			$query = "INSERT INTO users (name, password) VALUES ('$username','$password')";
 			$result = pg_query($query);
