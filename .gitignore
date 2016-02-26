@@ -1,6 +1,9 @@
 *.png
 *.html
 
+# password #
+postgresconnect.php
+
 # rubbish in the htdocs file #
 img/
 503.html
