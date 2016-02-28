@@ -22,8 +22,9 @@ header("Location: http://127.0.0.1/main.php");
 			<input type="password" name="password" placeholder="************" type="password">
 			<input name="submit" type="submit" value="Login">
 			</form>
-			<a href="http://127.0.0.1/register.php">Register</a>
 		</div>
-
+		<div>
+			<b><a href="http://127.0.0.1/register.php">Register a new User account</a></b>
+		</div>
 	</body>
 </html>

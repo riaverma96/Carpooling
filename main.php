@@ -12,6 +12,7 @@ include('session.php');
 </td></tr>
 <tr><td>
 <b>Welcome: <i><?php echo $login_session; ?></i></b>
+<b><a href="http://127.0.0.1/set_profile.php">Change profile settings</a></b>
 <b><a href="http://127.0.0.1/logout.php">Logout</a></b>
 </td></tr>
 <tr>
