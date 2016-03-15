@@ -18,7 +18,7 @@ $db = include 'postgresconnect.php';
           rid numeric PRIMARY KEY,
           fromWhere VARCHAR(128) NOT NULL,
           toWhere VARCHAR(128) NOT NULL,
-          numSeatsWanted numeric,
+          numSeatsWanted numeric CHECK(numSeatsWanted >= 1),
           rDate DATE NOT NULL,
           rTime VARCHAR(4) NOT NULL, 
           requestor VARCHAR(64),
@@ -31,7 +31,7 @@ $db = include 'postgresconnect.php';
         
         $query = "CREATE TABLE owns_car(
           license VARCHAR(16) PRIMARY KEY,
-          numFreeSeats numeric,
+          numFreeSeats numeric CHECK(numFreeSeats >= 1),
           cOwner VARCHAR(64) REFERENCES users(name)
         );";
         $result = pg_query($query); 
@@ -44,7 +44,7 @@ $db = include 'postgresconnect.php';
           fromWhere VARCHAR(128) NOT NULL,
           toWhere VARCHAR(128) NOT NULL,
           tripCost numeric NOT NULL,
-          numSeatsRemaining numeric NOT NULL,
+          numSeatsRemaining numeric NOT NULL CHECK (numSeatsRemaining >= 0),
           usedCar VARCHAR(16) REFERENCES owns_car(license)
         );";
         $result = pg_query($query); 
