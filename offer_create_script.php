@@ -8,6 +8,9 @@ include ('session.php');
 		if (empty($_POST['car'])){
 			$error = "You have not selected a car.";
 			echo $error;
+		} elseif($_POST['car'] == 'null'){
+			$error = "It appears you do not own a car...";
+			echo $error;
 		} elseif(empty($_POST['startPoint']) || empty($_POST['endPoint'])){
 			$error = "Start or End point invalid!";
 			echo $error;
@@ -60,3 +63,16 @@ include ('session.php');
 	}
 
 ?>
+
+<html>
+	<head>
+		<title> Creation Result </title>
+	</head>
+
+	<body>
+		<div>
+			<a href="http://127.0.0.1/offer_create.php">Try Again</a>
+		</div>
+
+	</body>
+</html>

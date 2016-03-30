@@ -19,8 +19,12 @@ include('session.php');
 				$query = "SELECT license from owns_car WHERE cOwner = '$username'";
 				$result = pg_query($query);
 				
-				while ($row = pg_fetch_array($result)){
-					print "<option value=\"$row[0]\">$row[0]</option>";
+				if(pg_num_rows($result) == 0){
+					print "<option value=\"null\">No cars</option>";
+				} else{
+					while ($row = pg_fetch_array($result)){
+						print "<option value=\"$row[0]\">$row[0]</option>";
+					}
 				}
 			?>
 			</select>
