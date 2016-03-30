@@ -20,7 +20,7 @@
 				header("Location: http://127.0.0.1/main.php");
 			} else {
 				$error = "Username or password is invalid";
-				header("Location: http://127.0.0.1/login.php/");
+				header("Location: http://127.0.0.1/login.php");
 			}
 			pg_close($db);
 		}
