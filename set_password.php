@@ -22,7 +22,7 @@ include ('session.php');
 				header("Location: http://127.0.0.1/set_profile.php");
 			} else {
 				$error = "Succesful change in password";
-				header("Location: http://127.0.0.1/set_profile.php/");
+				header("Location: http://127.0.0.1/set_profile.php");
 			}
 			pg_close($db);
 		}
