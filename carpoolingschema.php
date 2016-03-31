@@ -45,6 +45,8 @@ $db = include 'postgresconnect.php';
           toWhere VARCHAR(128) NOT NULL,
           tripCost numeric NOT NULL,
           numSeatsRemaining numeric NOT NULL CHECK (numSeatsRemaining >= 0),
+          offerDate DATE NOT NULL,
+          offerTime VARCHAR(4) NOT NULL, 
           usedCar VARCHAR(16) REFERENCES owns_car(license)
         );";
         $result = pg_query($query); 
