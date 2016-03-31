@@ -12,7 +12,7 @@ include('session.php');
 			<p><b>Create a new Offer</b></p>
 			
 			<p><b>Select a car:</b></p>
-			<!-- Offer creation form -->
+			<p>
 			<select name = "car" form="offer_create_form">
 			<?php 
 				$username = $_SESSION['login_user'];	
@@ -28,21 +28,36 @@ include('session.php');
 				}
 			?>
 			</select>
+			</p>
 			
 		</div>
 		
 		
 		<div>		
 			<form action = "offer_create_script.php" id= "offer_create_form" method="post">
+				<p>
 				<label>Start Point:</label>
 				<input type="text" name="startPoint">
+				</p> <p>
 				<label>End Point:</label>
 				<input type="text" name="endPoint">
+				</p> <p>
 				<label>Number of Passengers:</label>
-				<input type="number" name="pax" min="0">
+				<input type="number" name="pax" min="1" value = "1">
+				</p> <p>
 				<label>Asking Price:</label>
-				<input type="number" name="price" min="0">
+				<input type="number" name="price" step = "0.01" min="0.00" value = "0.00">
+				</p> <p>
+				<label>Date:</label>
+				<input type="date" name="date" value = "<?php echo date('Y-m-d'); ?>">
+				</p> <p>
+				<label>Time:</label>
+				<input type="number" name="hour" size = "2" min = "00" max = "23" value = "00">
+				<label>:</label>
+				<input type="number" name="minute" min = "00" max = "59" size = "2" value = "00">
+				</p><p>
 				<input name="submit" type="submit">
+				</p>
 			</form>
 		</div>
 		

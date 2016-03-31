@@ -37,6 +37,9 @@ include('session.php');
 <b><a href="http://127.0.0.1/offer_create.php">Offer a Ride</a></b>
 </td></tr>
 <tr><td>
+<b><a href="http://127.0.0.1/offer_accept.php">Accept a Ride Offer</a></b>
+</td></tr>
+<tr><td>
 <b><a href="http://127.0.0.1/logout.php">Logout</a></b>
 </td></tr>
 <tr>
