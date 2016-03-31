@@ -31,13 +31,19 @@ include('session.php');
 	</div>
 </td></tr>
 <tr><td>
-<b><a href="http://127.0.0.1/set_profile.php">Change profile settings</a></b>
-</td></tr>
-<tr><td>
 <b><a href="http://127.0.0.1/offer_create.php">Offer a Ride</a></b>
 </td></tr>
 <tr><td>
 <b><a href="http://127.0.0.1/offer_accept.php">Accept a Ride Offer</a></b>
+</td></tr>
+<tr><td>
+<b><a href="http://127.0.0.1/req_create.php">Request a Ride</a></b>
+</td></tr>
+<tr><td>
+<b><a href="http://127.0.0.1/req_view.php">Outstanding Requests</a></b>
+</td></tr>
+<tr><td>
+<b><a href="http://127.0.0.1/set_profile.php">Change profile settings</a></b>
 </td></tr>
 <tr><td>
 <b><a href="http://127.0.0.1/logout.php">Logout</a></b>
