@@ -126,21 +126,21 @@ $db = include 'postgresconnect.php';
     
         echo "owns_car table successfully populated.<br>"; 
          
-        // offerid, from, to, trip cost, num seats remaining, usedCar
+        // offerid, from, to, trip cost, num seats remaining, offer date, offer time, usedCar
          
-        $query = "INSERT INTO creates_offer VALUES('1', 'Paya Lebar Block 199', 'SMU Block A', '5', '1', 'SBB1578X');";
+        $query = "INSERT INTO creates_offer VALUES('1', 'Paya Lebar Block 199', 'SMU Block A', '5', '1', '12/07/2016', '1000', 'SBB1578X');";
         $result = pg_query($query); 
         handleError($result);
         
-        $query = "INSERT INTO creates_offer VALUES('2', 'Townhill Secondary School', 'East Coast Park', '4.50', '2', 'SJT5824B');";
+        $query = "INSERT INTO creates_offer VALUES('2', 'Townhill Secondary School', 'East Coast Park', '4.50', '2', '11/06/2016', '1200', 'SJT5824B');";
         $result = pg_query($query); 
         handleError($result);
         
-        $query = "INSERT INTO creates_offer VALUES('3', 'Woodlands Lane 7', 'Singapore Zoo', '6.50', '2', 'SGG5521H');";
+        $query = "INSERT INTO creates_offer VALUES('3', 'Woodlands Lane 7', 'Singapore Zoo', '6.50', '2', '23/08/2016', '1300', 'SGG5521H');";
         $result = pg_query($query); 
         handleError($result);
         
-        $query = "INSERT INTO creates_offer VALUES('4', 'Sengkang West Block 190', 'NUS School of Computing', '4.50', '0', 'SFD1299D');";
+        $query = "INSERT INTO creates_offer VALUES('4', 'Sengkang West Block 190', 'NUS School of Computing', '4.50', '0', '01/09/2016', '0845', 'SFD1299D');";
         $result = pg_query($query); 
         handleError($result);
     
