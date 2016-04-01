@@ -15,14 +15,37 @@ include('session.php');
 </head>
 
 <body>
-<table>
-<tr> <td colspan="2" style="background-color:#FFA50F;">
-  <div class="jumbotron"><h1> CarPooling ROCKS</h1></div>
-</td></tr>
-<tr><td>
+<div class="container">
+    <ul class="navbar navbar-inverse">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://127.0.0.1/bootstrap.php">CarPooling</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+				<li class="active"><a href="#">Home</a></li>
+				<li><a href="http://127.0.0.1/offer_create.php">Offer A Ride</a></li>
+				<li><a href="http://127.0.0.1/req_create.php">Request a Ride</a></li>
+				<li><a href="http://127.0.0.1/req_view.php">Outstanding Requests</a></li>
+				<li><a href="http://127.0.0.1/set_profile.php">Change profile settings</a></li>
+				<li><a href="http://127.0.0.1/logout.php">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+	</ul>
+</div>
+
+<div class="jumbotron">
+	<h1> CarPooling ROCKS</h1>
+	<p> Safety Message of the Day: Don't drink and drive.</p>
+</div>
+
 <b>Welcome: <i><?php echo $login_session; ?></i></b>
-</td></tr>
-<tr><td>
+
 	<div> <!-- Funds Display, should be in table format -->
 		<?php
 			$username = $login_session;
@@ -38,24 +61,10 @@ include('session.php');
 			print "</table> \n </p> \n";
 		?>
 	</div>
-</td></tr>
-<tr><td>
-<b><a href="http://127.0.0.1/offer_create.php">Offer a Ride</a></b>
-</td></tr>
-<tr><td>
-<b><a href="http://127.0.0.1/offer_accept.php">Accept a Ride Offer</a></b>
-</td></tr>
-<tr><td>
-<b><a href="http://127.0.0.1/req_create.php">Request a Ride</a></b>
-</td></tr>
-<tr><td>
-<b><a href="http://127.0.0.1/req_view.php">Outstanding Requests</a></b>
-</td></tr>
-<tr><td>
-<b><a href="http://127.0.0.1/set_profile.php">Change profile settings</a></b>
-</td></tr>
-<tr><td>
-<b><a href="http://127.0.0.1/logout.php">Logout</a></b>
+
+
+
+
 </td></tr>
 <tr>
 <td style="background-color:#eeeeee;">
