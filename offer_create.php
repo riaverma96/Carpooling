@@ -70,7 +70,8 @@ $numNotifications = pg_query($query);
 	</ul>
 </div>
 	
-	
+	<!-- Offset Navbar -->
+<div style = "margin-top:70px;"></div>
 	
 	
 	

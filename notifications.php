@@ -70,7 +70,7 @@ $numNotifications = pg_query($query);
     </div>
 	</ul>
 </div>
-<div class = "container">
+<div class = "container" style = "margin-top:70px;">
 <h2>STUB PAGE FOR NOTIFICATIONS</h2>
 </div>
 </body>

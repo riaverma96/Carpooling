@@ -66,9 +66,8 @@ $numNotifications = pg_query($query);
     </div>
 	</ul>
 </div>
-<!-- WTF HAPPENED HERE IDK MANZ -->
-<p><p><p><p><p><p><p><p><p><p><p>
-
+<!-- Offset Navbar -->
+<div style = "margin-top:70px;"></div>
 	<div> <!-- Changing Passwords -->
 		<p><b>Change new password</b></p>
 		<form action="set_password.php" method="post">
