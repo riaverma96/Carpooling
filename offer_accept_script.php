@@ -11,6 +11,32 @@ include ('session.php');
 		
 		$db = include 'postgresconnect.php';
 		
+		# Check money first
+		$query = "SELECT u.money FROM users u WHERE u.name = '$username'";
+		$result = pg_query($query);
+		$row = pg_fetch_array($result);
+		$money = $row[0];
+		
+		$query = "SELECT o.tripcost FROM creates_offer o WHERE o.offerid = '$offerid'";
+		$result = pg_query($query);
+		$row = pg_fetch_array($result);
+		$tripcost = $row[0];
+		
+		if ($money < $tripcost) {
+			$error = 'You have insufficient funds to accept this offer.';
+			echo $error;
+			return;
+		} else {
+			$remainingMoney = $money - $tripcost;
+			$query = "UPDATE users SET money = '$remainingMoney' WHERE name ='$username'";
+			$result = pg_query($query);
+			if (!$result) {
+				$error = pg_last_error();
+				echo $error;
+				return;
+			}
+		}
+		
 		$query = "SELECT numseatsremaining from creates_offer WHERE offerid = '$offerid'";
 		$result = pg_query($query);
 		$row = pg_fetch_array($result);

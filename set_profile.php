@@ -71,7 +71,7 @@ include('session.php');
 		<p><b>Add funds</b></p>
 		<form action="add_funds.php" method="post">
 			<label>Add amount:</label>
-			<input type="number" name="funds" min="1">
+			<input type="number" name="funds" step = "0.10" value = "1.00" min="1.00">
 			<input name="submit" type="submit">
 		</form>
 	</div>
