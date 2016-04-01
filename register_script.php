@@ -1,20 +1,30 @@
 <?php
 	$error = '';
 	if (isset($_POST['submit'])) {
+
 		if (empty($_POST['username']) || empty($_POST['password'])) {
 			$error = "Username or password is invalid";
 		}
 		else {
-			$username = $_POST['username'];
-			$password = $_POST['password'];
+			$username_without_sanitization = $_POST['username'];
+			$password_without_sanitization = $_POST['password'];
+			$username = filter_var($username_without_sanitization, FILTER_SANITIZE_STRING);
+			$password = filter_var($password_without_sanitization, FILTER_SANITIZE_STRING);
+
+			error_log($username);
+			error_log($password);
 
 			$db = include 'postgresconnect.php';
 
-			$query = "INSERT INTO users (name, password, money) VALUES ('$username','$password', '0')";
+			$query = "";
+
+			if (strpos($username, ';') === false && strpos($password, ';') === false) {
+				$query = "INSERT INTO users (name, password, money) VALUES ('$username','$password', '0')";
+			}
+
 			$result = pg_query($query);
 			if (!$result) {
-				$error = pg_last_error();
-				echo $error;
+				echo "User account not created";
 			} else {
 				echo "User account created";
 			}
