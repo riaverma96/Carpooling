@@ -39,7 +39,7 @@ $numNotifications = pg_query($query);
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-				<li class="active"><a href="#">Home</a></li>
+				<li><a href="#">Home</a></li>
 				<li><a href="http://127.0.0.1/offer_create.php">Offer Ride</a></li>
 				<li><a href="http://127.0.0.1/req_create.php">Request Ride</a></li>
 				<li><a href="http://127.0.0.1/search.php"><span class="glyphicon glyphicon-search"></span> Search</a></li>
