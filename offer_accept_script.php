@@ -25,6 +25,7 @@ include ('session.php');
 		if ($money < $tripcost) {
 			$error = 'You have insufficient funds to accept this offer.';
 			echo $error;
+			printLinks();
 			return;
 		} else {
 			$remainingMoney = $money - $tripcost;
@@ -33,6 +34,7 @@ include ('session.php');
 			if (!$result) {
 				$error = pg_last_error();
 				echo $error;
+				printLinks();
 				return;
 			}
 		}
@@ -48,6 +50,7 @@ include ('session.php');
 		if (!$result) {
 			$error = pg_last_error();
 			echo $error;
+			printLinks();
             return;
 		}
 	
@@ -57,27 +60,33 @@ include ('session.php');
 		if (!$result) {
 			$error = pg_last_error();
 			echo $error;
+			printLinks();
             return;
 		}
 		
 		echo "Booking created successfully!";
+		printLinks();
 	}
+	
+	function printLinks()
+        {
+			echo "
+			<html>
+				<head>
+					<title> Booking Result </title>
+				</head>
+
+				<body>
+					<div>
+						<p>
+						<a href=\"http://127.0.0.1/offer_accept.php\">Make another Booking</a>
+						</p> <p>
+						<a href=\"http://127.0.0.1/main.php\">Back to Home</a>
+						</p>
+					</div>
+
+				</body>
+			</html>";
+        }
 
 ?>
-
-<html>
-	<head>
-		<title> Booking Result </title>
-	</head>
-
-	<body>
-		<div>
-			<p>
-			<a href="http://127.0.0.1/offer_accept.php">Make another Booking</a>
-			</p> <p>
-			<a href="http://127.0.0.1/main.php">Back to Home</a>
-			</p>
-		</div>
-
-	</body>
-</html>
