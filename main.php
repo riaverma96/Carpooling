@@ -40,6 +40,9 @@ include('session.php');
 	</div>
 </td></tr>
 <tr><td>
+<b><a href="http://127.0.0.1/bootstrap.php">BOOTSTRAP TEST PAGE</a></b>
+</td></tr>
+<tr><td>
 <b><a href="http://127.0.0.1/offer_create.php">Offer a Ride</a></b>
 </td></tr>
 <tr><td>
