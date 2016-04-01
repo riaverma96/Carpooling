@@ -19,7 +19,8 @@ include('session.php');
 				<?php
 					$username = $_SESSION['login_user'];
 					$date = date("Y-m-d");
-					$query = "SELECT * FROM creates_offer WHERE numseatsremaining > 0 AND offerdate >= '$date' AND usedcar NOT IN (SELECT license FROM owns_car WHERE cowner = '$username')";
+					$query = "SELECT * FROM creates_offer o WHERE o.numseatsremaining > 0 AND o.offerdate >= '$date' AND o.usedcar NOT IN (SELECT c.license FROM owns_car c WHERE c.cowner = '$username')
+                    AND NOT EXISTS (SELECT * FROM booking b WHERE b.username = '$username' AND b.offerid = o.offerid)"; # Not exists handles case where user already booked the same ride previously.
 					$result = pg_query($query);
 							
 					while ($row = pg_fetch_array($result)) {
