@@ -57,7 +57,7 @@ $numNotifications = pg_query($query);
 							} ?> </span>
 					<ul class="dropdown-menu">
 						<li><a href="http://127.0.0.1/set_profile.php">Set Profile</a></li>
-						<li><a href="#">Notifications</a></li>
+						<li><a href="http://127.0.0.1/notifications.php">Notifications</a></li>
 					</ul>
 				</li>
 				<li>
