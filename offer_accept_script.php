@@ -15,6 +15,15 @@ include ('session.php');
 		$result = pg_query($query);
 		$row = pg_fetch_array($result);
 		$seatsLeft = $row[0] - 1;
+        
+        $query = "INSERT INTO booking (isusernotified, username, offerid) VALUES ('$notified', '$username', '$offerid')";
+		$result = pg_query($query);
+		
+		if (!$result) {
+			$error = pg_last_error();
+			echo $error;
+            return;
+		}
 	
 		$query = "UPDATE creates_offer SET numseatsremaining = '$seatsLeft' WHERE offerid ='$offerid'";
 		$result = pg_query($query);
@@ -22,14 +31,7 @@ include ('session.php');
 		if (!$result) {
 			$error = pg_last_error();
 			echo $error;
-		}
-		
-		$query = "INSERT INTO booking (isusernotified, username, offerid) VALUES ('$notified', '$username', '$offerid')";
-		$result = pg_query($query);
-		
-		if (!$result) {
-			$error = pg_last_error();
-			echo $error;
+            return;
 		}
 		
 		echo "Booking created successfully!";
