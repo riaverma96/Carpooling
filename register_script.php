@@ -3,7 +3,7 @@
 	if (isset($_POST['submit'])) {
 
 		if (empty($_POST['username']) || empty($_POST['password'])) {
-			$error = "Username or password is invalid";
+			$error = "#ff0000\">Username or password is invalid";
 		}
 		else {
 			$username_without_sanitization = $_POST['username'];
@@ -24,9 +24,9 @@
 
 			$result = pg_query($query);
 			if (!$result) {
-				echo "User account not created";
+				echo "#ff0000\">User account not created";
 			} else {
-				echo "User account created";
+				echo "#00ff00\">User account created";
 			}
 			pg_close($db);
 		}

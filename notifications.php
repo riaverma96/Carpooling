@@ -3,8 +3,9 @@ include('session.php');
 ?>
 
 <html>
-	<head>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<head><title>CarPooling</title>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
@@ -15,10 +16,10 @@ include('session.php');
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
-		<title> Create an Offer </title>
-	</head>
+</head>
 
-	<body>
+
+<body>
 <?php
 $query = "SELECT COUNT(*)
 			FROM booking b
@@ -39,7 +40,7 @@ $numNotifications = pg_query($query);
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
 				<li><a href="http://127.0.0.1/main.php">Home</a></li>
-				<li class="active"><a href="http://127.0.0.1/offer_create.php">Offer Ride</a></li>
+				<li><a href="http://127.0.0.1/offer_create.php">Offer Ride</a></li>
                 <li><a href="http://127.0.0.1/offer_accept.php">Book a Ride</a></li>
 				<li><a href="http://127.0.0.1/req_create.php">Request Ride</a></li>
 				<li><a href="http://127.0.0.1/search.php"><span class="glyphicon glyphicon-search"></span> Search</a></li>
@@ -70,66 +71,8 @@ $numNotifications = pg_query($query);
     </div>
 	</ul>
 </div>
-	
-	<!-- Offset Navbar -->
-<div style = "margin-top:70px;"></div>
-	
-	
-	
-		<div>
-			<p><b>Create a new Offer</b></p>
-			
-			<p><b>Select a car:</b></p>
-			<p>
-			<select name = "car" form="offer_create_form">
-			<?php 
-				$username = $_SESSION['login_user'];	
-				$query = "SELECT license from owns_car WHERE cOwner = '$username'";
-				$result = pg_query($query);
-				
-				if(pg_num_rows($result) == 0){
-					print "<option value=\"null\">No cars</option>";
-				} else{
-					while ($row = pg_fetch_array($result)){
-						print "<option value=\"$row[0]\">$row[0]</option>";
-					}
-				}
-			?>
-			</select>
-			</p>
-			
-		</div>
-		
-		
-		<div>		
-			<form action = "offer_create_script.php" id= "offer_create_form" method="post">
-				<p>
-				<label>Start Point:</label>
-				<input type="text" name="startPoint">
-				</p> <p>
-				<label>End Point:</label>
-				<input type="text" name="endPoint">
-				</p> <p>
-				<label>Number of Passengers:</label>
-				<input type="number" name="pax" min="1" value = "1">
-				</p> <p>
-				<label>Asking Price:</label>
-				<input type="number" name="price" step = "0.01" min="0.00" value = "0.00">
-				</p> <p>
-				<label>Date:</label>
-				<input type="date" name="date" value = "<?php echo date('Y-m-d'); ?>">
-				</p> <p>
-				<label>Time:</label>
-				<input type="number" name="hour" size = "2" min = "00" max = "23" value = "00">
-				<label>:</label>
-				<input type="number" name="minute" min = "00" max = "59" size = "2" value = "00">
-				</p><p>
-				<input name="submit" type="submit">
-				</p>
-			</form>
-		</div>
-		
-		<a href="http://127.0.0.1/main.php">Back</a>
-
-	</body>
+<div class = "container" style = "margin-top:70px;">
+<h2>STUB PAGE FOR NOTIFICATIONS</h2>
+</div>
+</body>
 </html>
