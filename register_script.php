@@ -19,7 +19,7 @@
 			$query = "";
 
 			if (strpos($username, ';') === false && strpos($password, ';') === false) {
-				$query = "INSERT INTO users (name, password, money) VALUES ('$username','$password', '0')";
+				$query = "INSERT INTO users (name, password, money, admin) VALUES ('$username','$password', '0', false)";
 			}
 
 			$result = pg_query($query);

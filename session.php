@@ -12,9 +12,10 @@ if (!isset($_SESSION['login_user'])) {
 
 $user_check = $_SESSION['login_user'];
 // SQL Query To Fetch Complete Information Of User
-$ses = pg_query("SELECT name FROM users WHERE name='$user_check'");
+$ses = pg_query("SELECT name, admin FROM users WHERE name='$user_check'");
 $row = pg_fetch_assoc($ses);
 $login_session =$row['name'];
+$admin_session = $row['admin'];
 if(!isset($login_session)){
 	error_log("You only come here if your username is not within the session");
 	pg_close($db); // Closing Connection

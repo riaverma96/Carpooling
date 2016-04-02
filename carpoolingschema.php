@@ -7,7 +7,8 @@ $db = include 'postgresconnect.php';
           name VARCHAR(64) PRIMARY KEY,
           password VARCHAR(64) NOT NULL,
           email VARCHAR(128) UNIQUE,
-          money numeric NOT NULL
+          money numeric NOT NULL,
+          admin BOOLEAN DEFAULT FALSE
         );";
         $result = pg_query($query); 
         handleError($result);
@@ -66,7 +67,7 @@ $db = include 'postgresconnect.php';
         echo "booking table successfully created.<br>"; 
 
         pg_free_result($result);
-        pg_close($dbconn); 
+        pg_close($db); 
         
         function handleError($result)
         {
