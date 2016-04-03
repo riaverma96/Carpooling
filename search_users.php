@@ -19,7 +19,7 @@ include('session.php');
 <?php
 $query = "SELECT COUNT(*)
 			FROM booking b
-			WHERE b.username = '$username'
+			WHERE b.username = '$login_session'
 			AND b.isUserNotified = 'false'";
 $numNotifications = pg_query($query); 
 ?>
@@ -40,7 +40,6 @@ $numNotifications = pg_query($query);
                 <li><a href="http://127.0.0.1/offer_accept.php">Book a Ride</a></li>
 				<li><a href="http://127.0.0.1/req_create.php">Request Ride</a></li>
 				<li><a href="http://127.0.0.1/search.php"><span class="glyphicon glyphicon-search"></span> Search</a></li>
-				<li><a href="http://127.0.0.1/search_users.php"><span class="glyphicon glyphicon-search"></span> Search Users</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown">
@@ -70,74 +69,12 @@ $numNotifications = pg_query($query);
 </div>
 <!-- Offset Navbar -->
 <div style = "margin-top:70px;"></div>
-	<div> <!-- Changing Passwords -->
-		<p><b>Change new password</b></p>
-		<form action="set_password.php" method="post">
-			<label>New password:</label>
-			<input type="password" name="newPassword" placeholder="************" type="password">
-			<label>Old password:</label>
-			<input type="password" name="oldPassword" placeholder="************" type="password">
-			<input name="submit" type="submit">
-		</form>
-	</div>
-	<div> <!-- Changing Email -->
-		<p><b>Set email</b></p>
-		<form action="set_email.php" method="post">
-			<label>New Email:</label>
-			<input type="text" name="newEmail">
-			<input name="submit" type="submit">
-		</form>
-	</div>
-	<div> <!-- Car Display, should be in table format -->
-		<?php
-			$username = $login_session;
-			$query = "SELECT * FROM owns_car WHERE cOwner = '$username'";
-			$result = pg_query($query);
-			
-			print "<p> \n <table> \n <tr> \n <b>Your Cars</b> \n </tr> \n <tr> \n <td>License</td> \n <td>Seat Available</td></tr> \n ";
-			while ($row = pg_fetch_array($result)) {
-				print "<tr><td> \n";
-				print $row[0];
-				print "</td> \n <td> \n";
-				print (string) $row[1];
-				print "</td></tr> \n";
-			}
-			print "</table> \n </p> \n";
-
-		?>
-	</div>
-	<div> <!-- Cars setting, for adding new cars -->
-		<p><b>Register cars</b></p>
-		<form action="register_car.php" method="post">
-			<label>New Car License Number:</label>
-			<input type="text" name="newLicense">
-			<label>Seats Available:</label>
-			<input type="number" name="seatsAvailable" min="1">
-			<input name="submit" type="submit">
-		</form>
-	</div>
-	<div> <!-- Funds Display, should be in table format -->
-		<?php
-			$username = $login_session;
-			$query = "SELECT money FROM users WHERE name = '$username'";
-			$result = pg_query($query);
-			
-			print "<p> \n <table> \n <tr> \n <b>Current Amount</b> \n </tr> \n <tr> \n ";
-			while ($row = pg_fetch_array($result)) {
-				print "<tr><td> \n";
-				print (string) $row[0];
-				print "</td></tr> \n";
-			}
-			print "</table> \n </p> \n";
-
-		?>
-	</div>
-	<div> <!-- Add money, for adding new cars -->
-		<p><b>Add funds</b></p>
-		<form action="add_funds.php" method="post">
-			<label>Add amount:</label>
-			<input type="number" name="funds" step = "0.10" value = "1.00" min="1.00">
-			<input name="submit" type="submit">
+	<div> <!-- Search users -->
+		<p><b>Search Username</b></p>
+		<form action="user_results.php" method="post">
+			<label>Username:</label>
+			<input type="text" name="user">
+			<input name="submit" type="submit" value="Search">
 		</form>
 	</div>
 	<div>
