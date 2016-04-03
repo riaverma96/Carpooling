@@ -22,7 +22,7 @@ include('session.php');
 <?php
 $query = "SELECT COUNT(*)
 			FROM booking b
-			WHERE b.username = '$username'
+			WHERE b.username = '$login_session'
 			AND b.isUserNotified = 'false'";
 $numNotifications = pg_query($query); 
 ?>
