@@ -177,7 +177,8 @@ include('session.php');
 								print "</table>";
 
 								#Only Admins can delete users
-								if ($admin_session) {
+								if ($admin_session == 't') {
+									error_log((string)$admin_session);
 									print "<form action=\"http://127.0.0.1/delete_user_script.php\" method=\"post\" class=\"form-signin\">";
 									print "<input type=\"hidden\" name=\"search\" value=\"$search_user\">";	
 									print "<input name=\"submit\" type=\"submit\" value=\"Delete User\">";
