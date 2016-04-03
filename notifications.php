@@ -44,6 +44,7 @@ $numNotifications = pg_query($query);
                 <li><a href="http://127.0.0.1/offer_accept.php">Book a Ride</a></li>
 				<li><a href="http://127.0.0.1/req_create.php">Request Ride</a></li>
 				<li><a href="http://127.0.0.1/search.php"><span class="glyphicon glyphicon-search"></span> Search</a></li>
+                <li><a href="http://127.0.0.1/search_users.php"><span class="glyphicon glyphicon-search"></span> Search Users</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown">
