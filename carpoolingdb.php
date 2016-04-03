@@ -27,7 +27,7 @@ $db = include 'postgresconnect.php';
         $result = pg_query($query); 
         handleError($result);
         
-        $query = "INSERT INTO users VALUES('Kenneth', 'k12345', 'kenorkennot@hotmail.com', '31.00');";
+        $query = "INSERT INTO users VALUES('Kenneth', 'k12345', 'kenorkennot@hotmail.com', '31.00', 'true');";
         $result = pg_query($query); 
         handleError($result);
         

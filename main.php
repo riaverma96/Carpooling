@@ -78,7 +78,14 @@ $numNotifications = pg_query($query);
 <div class="container">
 	<div class="jumbotron">
 		<h1> CarPooling ROCKS</h1>
-		<b>Welcome, <i><?php echo $login_session; ?></i></b>
+		<b>Welcome, <i><?php echo $login_session; ?></i>
+            <?php // Check if user is admin, and prints if he/she is.
+            if ($admin_session == 't') {
+                echo " "; // space
+                echo "(Administrator)";
+            }
+            ?>
+        </b>
 		<br>
 		<?php
 			$username = $login_session;
