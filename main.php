@@ -33,6 +33,8 @@ include('navbar.php');
             if ($admin_session == 't') {
                 echo " "; // space
                 echo "(Administrator)";
+				// Wipe outdated data
+				include ('removeoutdated.php');
             }
             ?>
         </b>
