@@ -24,8 +24,19 @@ $numNotifications = pg_query($query);
 				<li <?php if($title === 'create'){ echo "class=\"active\"";}?>><a href="http://127.0.0.1/req_create.php">Request Ride</a></li>
 				<li <?php if($title === 'search'){ echo "class=\"active\"";}?>><a href="http://127.0.0.1/search.php"><span class="glyphicon glyphicon-search"></span> Search</a></li>
 				<li <?php if($title === 'searchUser'){ echo "class=\"active\"";}?>><a href="http://127.0.0.1/search_users.php"><span class="glyphicon glyphicon-search"></span> Search Users</a></li>
+				
+
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
+				<?php if ($admin_session == 't') {
+                echo "<li ";
+                if($title === 'admin') {
+					echo "class=\"active\"";
+				}
+				
+				echo "><a href=\"http://127.0.0.1/view_all_offers_requests.php\"><span class=\"glyphicon glyphicon-tasks\"></span> Admin Page</a></li>";
+				}
+				?>
 				<li class="dropdown" style="cursor:pointer;">
 					<a class="dropdown-toggle" data-toggle="dropdown">
 						<span class="glyphicon glyphicon-user"></span> 
