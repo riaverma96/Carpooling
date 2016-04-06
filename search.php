@@ -1,5 +1,5 @@
 <?php 
-include ('session2.php');
+include ('session.php');
 ?>
 
 <html>
@@ -8,90 +8,154 @@ include ('session2.php');
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-    <title> Search - 1</title>
+    <title> Search - 5</title>
   </head>
 
   <body>
+
+    <div class="container">
+      <ul class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://127.0.0.1/main.php">CarPooling</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+            <li><a href="http://127.0.0.1/main.php">Home</a></li>
+            <li><a href="http://127.0.0.1/offer_create.php">Offer Ride</a></li>
+                    <li><a href="http://127.0.0.1/offer_accept.php">Book a Ride</a></li>
+            <li><a href="http://127.0.0.1/req_create.php">Request Ride</a></li>
+            <li class="active"><a href="http://127.0.0.1/search.php"><span class="glyphicon glyphicon-search"></span> Search</a></li>
+                    <li><a href="http://127.0.0.1/search_users.php"><span class="glyphicon glyphicon-search"></span> Search Users</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown" style="cursor:pointer;">
+              <a class="dropdown-toggle" data-toggle="dropdown">
+                <span class="glyphicon glyphicon-user"></span> 
+                <?php echo $login_session; ?> 
+                <span class="badge">
+                <?php if (is_null($numNotifications[0])) {
+                    print '0';
+                  } else {
+                    print $numNotifications[0];
+                  } ?> </span>
+              <ul class="dropdown-menu">
+                <li><a href="http://127.0.0.1/set_profile.php">Set Profile</a></li>
+                <li><a href="http://127.0.0.1/notifications.php">Notifications</a></li>
+              </ul>
+            </li>
+            <li>
+              <a href="http://127.0.0.1/logout.php">
+              <span class="glyphicon glyphicon-log-out"></span> Logout
+              </a>
+            </li>
+                </ul>
+            </div>
+        </div>
+      </ul>
+    </div>
+
     <table>
 
-      <tr> <td colspan="2" style="background-color:#FFA500;">
-        <h1> Find a Ride! </h1>
-      </td> </tr>
-      
-      <?php
-          $dbconn = pg_connect("host=localhost port=5432 dbname=postgres user=postgres password=hour12")
-              or die('Could not connect: ' . pg_last_error()); 
-      ?>
+      <div style = "margin-top:70px;"></div>
 
-      <tr> <td style="background-color:#eeeeee;">
+        <div>
+          <p><b> Find a Ride </b></p>
+        </div>
 
+      <div>
         <form>
-          <p></p>
-          <select name="type"> <option value=""> Pick Ride Type: </option>
-              <option value="offer" <?php if($type == 'offer') { ?> selected <?php } ?> >offers</option>
-              <option value="request" <?php if($type == 'request') { ?> selected <?php } ?> >request</option>
-          </select>
-          
-          <input type="submit" name="formSelect" value="Select">
+          <p>
+            <select name="type"> <option value=""> Pick Ride Type: </option>
+                <option value="offer" <?php if($type == 'offer') { ?> selected <?php } ?> >offers</option>
+                <option value="request" <?php if($type == 'request') { ?> selected <?php } ?> >request</option>
+            </select>
+          </p>
 
+          <p>
+            <input type="submit" name="formSelect" value="Select">
+          </p>
 
+          <br></br>
 
-          <p> Fill Out Ride Details: </p>
-          
-          <input type="date" name="day"> 
+          <p>
+            Fill Out Ride Details:
+          </p>
 
-          <select name= "start"> <option value=""> Start </option>
-            <?php
-              setType2();
-              $query = "SELECT DISTINCT fromwhere FROM ".$getType." ";
-              $result = pg_query($query) or die('Query failed: ' . pg_last_error());
-               
-              while($line = pg_fetch_array($result, null, PGSQL_ASSOC)){
-                foreach ($line as $col_value) {
-                  echo "<option value=\"".$col_value."\">".$col_value."</option><br>";
+          <p>
+            <label>Date:</label>
+            <input type="date" name="day"> 
+          </p>
+
+          <p>
+            <label>Start Point:</label>
+            <select name= "start"> <option value=""> Pick Up </option>
+              <?php
+                setType2();
+                $query = "SELECT DISTINCT fromwhere FROM ".$getType." ";
+                $result = pg_query($query) or die('Query failed: ' . pg_last_error());
+                 
+                while($line = pg_fetch_array($result, null, PGSQL_ASSOC)){
+                  foreach ($line as $col_value) {
+                    echo "<option value=\"".$col_value."\">".$col_value."</option><br>";
+                  }
                 }
-              }
-              pg_free_result($result);
-            ?>
-          </select>
+                pg_free_result($result);
+              ?>
+            </select>
+          </p>
 
-          <select name= "destination"> <option value=""> Destination </option>
-            <?php
-              setType2();
-              $queryo = "SELECT DISTINCT towhere FROM ".$getType." ";
-              $resulto = pg_query($queryo) or die('Query failed: ' . pg_last_error());
-               
-              while($lineo = pg_fetch_array($resulto, null, PGSQL_ASSOC)){
-                foreach ($lineo as $col_valueo) {
-                  echo "<option value=\"".$col_valueo."\">".$col_valueo."</option><br>";
+          <p>
+            <label>End Point:</label>
+            <select name= "destination"> <option value=""> Destination </option>
+              <?php
+                setType2();
+                $queryo = "SELECT DISTINCT towhere FROM ".$getType." ";
+                $resulto = pg_query($queryo) or die('Query failed: ' . pg_last_error());
+                 
+                while($lineo = pg_fetch_array($resulto, null, PGSQL_ASSOC)){
+                  foreach ($lineo as $col_valueo) {
+                    echo "<option value=\"".$col_valueo."\">".$col_valueo."</option><br>";
+                  }
                 }
-              }
-              pg_free_result($resulto);
-            ?>
-          </select>
+                pg_free_result($resulto);
+              ?>
+            </select>
+          </p>
 
-          <select name= "car"> <option value=""> Seat Availability </option>
-            <?php
-              setType2();
-              if ($getType == "creates_offer") {
-                $queryk = "SELECT DISTINCT numseatsremaining FROM ".$getType." ";
-              } else {
-                $queryk = "SELECT DISTINCT numseatswanted FROM ".$getType." ";  
-              }
-              $resultk = pg_query($queryk) or die('Query failed: ' . pg_last_error());
-               
-              while($linek = pg_fetch_array($resultk, null, PGSQL_ASSOC)){
-                foreach ($linek as $col_valuek) {
-                  echo "<option value=\"".$col_valuek."\">".$col_valuek."</option><br>";
+          <p>
+            <label>Number of Seats Available:</label>
+            <select name= "car"> <option value=""> Seat Availability </option>
+              <?php
+                setType2();
+                if ($getType == "creates_offer") {
+                  $queryk = "SELECT DISTINCT numseatsremaining FROM ".$getType." ";
+                } else {
+                  $queryk = "SELECT DISTINCT numseatswanted FROM ".$getType." ";  
                 }
-              }
-              pg_free_result($resultk);
-            ?>
-          </select>
+                $resultk = pg_query($queryk) or die('Query failed: ' . pg_last_error());
+                 
+                while($linek = pg_fetch_array($resultk, null, PGSQL_ASSOC)){
+                  foreach ($linek as $col_valuek) {
+                    echo "<option value=\"".$col_valuek."\">".$col_valuek."</option><br>";
+                  }
+                }
+                pg_free_result($resultk);
+              ?>
+            </select>
+          </p>
 
-          <p></p>
-          <input type="submit" name="formSubmit" value="Search For My Ride!" >
+          <p>
+            <input type="submit" name="formSubmit" value="Search For My Ride!" >
+          </p>
         </form>
+      </div>
+
+      <a href="http://127.0.0.1/main.php">Back</a>
 
         <?php
           $getType3="";
@@ -183,6 +247,8 @@ include ('session2.php');
                 $query = "SELECT * FROM ".$getType."";
               }
 
+
+              // Presentation :
               echo "<b>SQL:   </b>".$query."<br><br>";
               $result = pg_query($query) or die('Query failed: ' . pg_last_error());
               echo "<table border=\"1\" >
@@ -217,15 +283,13 @@ include ('session2.php');
               pg_free_result($result);
           }
         ?>
-      </td> </tr>
+
+
 
       <?php
         pg_close($dbconn);
       ?>
       
-      <tr> <td colspan="2" style="background-color:#FFA500; text-align:center;"> Copyright &#169; CS2102
-      </td> </tr>
-
     </table>
   </body>
 </html>
