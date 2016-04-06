@@ -20,8 +20,10 @@ include('navbar.php');
 </head>
 
 <body>
-<h2>New bookings since your last login:</h2>
-
+<div class="container">
+	<div class="jumbotron">
+	<h2>New bookings since your last login:</h2>
+	</div>
 	<div class="table-responsive">
             <table class="table table-striped">
               <thead>
@@ -44,7 +46,7 @@ include('navbar.php');
 					while($row = pg_fetch_array($result)){
 						$id = $row[0];
 						$date = (string) $row[1];
-						$time = str_pad((string) $row[6], 4, "0", STR_PAD_LEFT);
+						$time = str_pad((string) $row[2], 4, "0", STR_PAD_LEFT);
 						$from = $row[3];
 						$to = $row[4];
 						$car = (string) $row[5];
@@ -68,9 +70,26 @@ include('navbar.php');
 						print "</td></tr>";
 						
 					}
+					
+					$query = "SELECT * from booking b WHERE b.isusernotified = false AND b.offerid IN(SELECT o.offerid FROM creates_offer o WHERE o.offerid = b.offerid AND o.usedcar IN(SELECT c.license FROM owns_car c WHERE c.cowner = '$username'))";
+					$result = pg_query($query);
+					
+					while($row = pg_fetch_array($result)){
+						$passenger = (string) $row[1];
+						$id = $row[2];
+						$query = "UPDATE booking SET isusernotified = true WHERE username = '$passenger' and offerid = '$id'";
+						$res = pg_query($query);
+						
+						if(!$res){
+							$error = pg_last_error();
+							echo $error;
+							return;
+						}
+					}
 				?>
               </tbody>
             </table>
           </div>
+		 </div>
 </body>
 </html>
