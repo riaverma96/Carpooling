@@ -24,7 +24,7 @@ include('session.php');
 $username = $login_session;
 $query = "SELECT COUNT(*)
 			FROM booking b
-			WHERE b.username = '$username'
+			WHERE b.username = '$login_session'
 			AND b.isUserNotified = 'false'";
 $numNotifications = pg_query($query); 
 ?>
@@ -48,7 +48,7 @@ $numNotifications = pg_query($query);
         <li><a href="http://127.0.0.1/search_users.php"><span class="glyphicon glyphicon-search"></span> Search Users</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-				<li class="dropdown">
+				<li class="dropdown" style="cursor:pointer;">
 					<a class="dropdown-toggle" data-toggle="dropdown">
 						<span class="glyphicon glyphicon-user"></span> 
 						<?php echo $login_session; ?> 
@@ -78,7 +78,14 @@ $numNotifications = pg_query($query);
 <div class="container">
 	<div class="jumbotron">
 		<h1> CarPooling ROCKS</h1>
-		<b>Welcome, <i><?php echo $login_session; ?></i></b>
+		<b>Welcome, <i><?php echo $login_session; ?></i>
+            <?php // Check if user is admin, and prints if he/she is.
+            if ($admin_session == 't') {
+                echo " "; // space
+                echo "(Administrator)";
+            }
+            ?>
+        </b>
 		<br>
 		<?php
 			$username = $login_session;
@@ -106,26 +113,26 @@ $numNotifications = pg_query($query);
               </thead>
               <tbody>
                 <tr>
-                  <td class="col-md-2">Somebody</td>
-                  <td class="col-md-2">SQL</td>
-                  <td class="col-md-2">this</td>
+                  <td class="col-md-2">3 March 2016 15:00</td>
+                  <td class="col-md-2">Yew Tee MRT</td>
+                  <td class="col-md-2">HarbourFront MRT</td>
                 </tr>
                 <tr>
-                  <td class="col-md-2">1,001</td>
-                  <td class="col-md-2">1,001</td>
-                  <td class="col-md-2">1,001</td>
+                  <td class="col-md-2">3 March 2016, 16:00</td>
+                  <td class="col-md-2">HarbourFront MRT</td>
+                  <td class="col-md-2">Yew Tee MRT</td>
                 </tr>
                  <tr>
-                  <td class="col-md-2">1,001</td>
-                  <td class="col-md-2">1,001</td>
-                  <td class="col-md-2">1,001</td>
+                  <td class="col-md-2">7 March 2016, 10:00</td>
+                  <td class="col-md-2">NUS LT17</td>
+                  <td class="col-md-2">School of Computing</td>
                 </tr>
               </tbody>
             </table>
           </div>
 </div>
   <div class="col-xs-6">
-          <h2 class="sub-header">Your Requests</h2>
+          <h2 class="sub-header">Your Bookings</h2>
           <div class="table-responsive">
             <table class="table table-striped">
               <thead>
@@ -137,19 +144,19 @@ $numNotifications = pg_query($query);
               </thead>
               <tbody>
                 <tr>
-                  <td class="col-md-2">thing.</td>
-                  <td class="col-md-2">Thanks,</td>
-                  <td class="col-md-2">Ryan</td>
+                  <td class="col-md-2">4 May 2016, 23:59</td>
+                  <td class="col-md-2">Somerset MRT</td>
+                  <td class="col-md-2">Changi Airport</td>
                 </tr>
                 <tr>
-                  <td class="col-md-1">1,001</td>
-                  <td class="col-md-2">1,001</td>
-                  <td class="col-md-3">1,001</td>
+                  <td class="col-md-1">-</td>
+                  <td class="col-md-2">-</td>
+                  <td class="col-md-3">-</td>
                 </tr>
                  <tr>
-                  <td class="col-md-2">1,001</td>
-                  <td class="col-md-2">1,001</td>
-                  <td class="col-md-2">1,001</td>
+                  <td class="col-md-2">-</td>
+                  <td class="col-md-2">-</td>
+                  <td class="col-md-2">-</td>
                 </tr>
               </tbody>
             </table></div>

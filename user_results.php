@@ -40,9 +40,10 @@ include('session.php');
 							<li><a href="http://127.0.0.1/offer_accept.php">Book a Ride</a></li>
 							<li><a href="http://127.0.0.1/req_create.php">Request Ride</a></li>
 							<li><a href="http://127.0.0.1/search.php"><span class="glyphicon glyphicon-search"></span> Search</a></li>
+							<li class="active"><a href="http://127.0.0.1/search_users.php"><span class="glyphicon glyphicon-search"></span> Search Users</a></li>
 						</ul>
 						<ul class="nav navbar-nav navbar-right">
-							<li class="dropdown">
+							<li class="dropdown" style="cursor:pointer;">
 								<a class="dropdown-toggle" data-toggle="dropdown">
 									<span class="glyphicon glyphicon-user"></span> 
 									<?php echo $login_session; ?> 
@@ -177,7 +178,8 @@ include('session.php');
 								print "</table>";
 
 								#Only Admins can delete users
-								if ($admin_session) {
+								if ($admin_session == 't') {
+									error_log((string)$admin_session);
 									print "<form action=\"http://127.0.0.1/delete_user_script.php\" method=\"post\" class=\"form-signin\">";
 									print "<input type=\"hidden\" name=\"search\" value=\"$search_user\">";	
 									print "<input name=\"submit\" type=\"submit\" value=\"Delete User\">";

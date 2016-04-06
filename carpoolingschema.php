@@ -56,7 +56,7 @@ $db = include 'postgresconnect.php';
         echo "creates_offer table successfully created.<br>"; 
         
         $query = "CREATE TABLE booking(
-          isUserNotified VARCHAR(8) NOT NULL,
+          isUserNotified BOOLEAN DEFAULT FALSE,
           username VARCHAR(64) REFERENCES users(name),
           offerid numeric REFERENCES creates_offer(offerid),
           PRIMARY KEY (username, offerid)
