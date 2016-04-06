@@ -1,4 +1,5 @@
 <?php 
+$title = search;
 include ('session.php');
 ?>
 
