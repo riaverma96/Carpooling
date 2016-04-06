@@ -159,7 +159,7 @@ include('session.php');
 										print "</td><td class=\"col-md-1\">";
 										print (string) $userInfo[4];
 										print "</td><td class=\"col-md-1\">";
-										print $userInfo[5];
+										print str_pad($userInfo[5], 4, "0", STR_PAD_LEFT);
 										print "</td></tr>";	
 									}
 									print "</tbody>";
@@ -217,7 +217,7 @@ include('session.php');
 										print "</td><td class=\"col-md-1\">";
 										print (string) $userInfo[5];
 										print "</td><td class=\"col-md-1\">";
-										print $userInfo[6];
+										print str_pad($userInfo[6], 4, "0", STR_PAD_LEFT);
 										print "</td><td class=\"col-md-1\">";
 										print $userInfo[7];
 										print "</td></tr>";
