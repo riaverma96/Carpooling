@@ -1,10 +1,11 @@
 <?php
 $username = $login_session;
 $query = "SELECT COUNT(*)
-			FROM booking b
-			WHERE b.username = '$login_session'
-			AND b.isUserNotified = 'false'";
-$numNotifications = pg_query($query); 
+FROM creates_offer o, booking b, users u1, users u2 
+WHERE b.isusernotified = false
+AND b.offerid = o.offerid 
+AND b.username = u2.name AND o.usedcar IN(SELECT c.license FROM owns_car c WHERE c.cowner = u1.name AND u1.name = '$username')";
+$numNotifications = pg_fetch_array(pg_query($query)); 
 ?>
 <div class="container">
     <ul class="navbar navbar-inverse navbar-fixed-top">
