@@ -37,6 +37,28 @@ include ('session.php');
 				printLinks();
 				return;
 			}
+			
+			$query = "SELECT c.cowner from owns_car c WHERE c.license IN (SELECT o.usedcar from creates_offer o WHERE o.offerid = '$offerid')";
+			$result = pg_query($query);
+			if (!$result) {
+				$error = pg_last_error();
+				echo $error;
+				printLinks();
+				return;
+			} else{
+				$row = pg_fetch_array($result);
+				$driver = $row[0];
+				
+				$query = "UPDATE users SET money = money + '$tripcost' WHERE name ='$driver'";
+				$result = pg_query($query);
+				
+				if (!$result) {
+				$error = pg_last_error();
+				echo $error;
+				printLinks();
+				return;
+				}
+			}
 		}
 		
 		$query = "SELECT numseatsremaining from creates_offer WHERE offerid = '$offerid'";

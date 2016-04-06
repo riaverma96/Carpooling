@@ -106,27 +106,41 @@ $numNotifications = pg_query($query);
             <table class="table table-striped">
               <thead>
                 <tr>
-                  <th class="col-md-2">Date</th>
+                  <th class="col-md-2">Date/Time</th>
                   <th class="col-md-2">From</th>
                   <th class="col-md-2">To</th>
+				  <th class="col-md-2">Seats Left</th>
+				  <th class="col-md-2">Car</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td class="col-md-2">3 March 2016 15:00</td>
-                  <td class="col-md-2">Yew Tee MRT</td>
-                  <td class="col-md-2">HarbourFront MRT</td>
-                </tr>
-                <tr>
-                  <td class="col-md-2">3 March 2016, 16:00</td>
-                  <td class="col-md-2">HarbourFront MRT</td>
-                  <td class="col-md-2">Yew Tee MRT</td>
-                </tr>
-                 <tr>
-                  <td class="col-md-2">7 March 2016, 10:00</td>
-                  <td class="col-md-2">NUS LT17</td>
-                  <td class="col-md-2">School of Computing</td>
-                </tr>
+				<?php
+					$username = $login_session;
+					$query = "SELECT * from creates_offer o WHERE o.numseatsremaining > 0 AND o.usedcar IN(SELECT c.license from owns_car c WHERE c.cowner = '$username')";
+					$result = pg_query($query);
+					
+					while($row = pg_fetch_array($result)){
+						$from = $row[1];
+						$to = $row[2];
+						$seats = (string) $row[4];
+						$date = (string) $row[5];
+						$time = (string) $row[6];
+						$car = (string) $row[7];
+						
+						print "<tr><td class=\"col-md-2\">";
+						print "$date $time";
+						print "</td><td class=\"col-md-2\">";
+						print "$from";
+						print "</td><td class=\"col-md-2\">";
+						print "$to";
+						print "</td><td class=\"col-md-2\">";
+						print "$seats";
+						print "</td><td class=\"col-md-2\">";
+						print "$car";
+						print "</td></tr>";
+						
+					}
+				?>
               </tbody>
             </table>
           </div>
@@ -140,24 +154,33 @@ $numNotifications = pg_query($query);
                   <th class="col-md-2">Date</th>
                   <th class="col-md-2">From</th>
                   <th class="col-md-2">To</th>
+				  <th class="col-md-2">Car</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td class="col-md-2">4 May 2016, 23:59</td>
-                  <td class="col-md-2">Somerset MRT</td>
-                  <td class="col-md-2">Changi Airport</td>
-                </tr>
-                <tr>
-                  <td class="col-md-1">-</td>
-                  <td class="col-md-2">-</td>
-                  <td class="col-md-3">-</td>
-                </tr>
-                 <tr>
-                  <td class="col-md-2">-</td>
-                  <td class="col-md-2">-</td>
-                  <td class="col-md-2">-</td>
-                </tr>
+				<?php
+					$username = $login_session;
+					$query = "SELECT * from creates_offer o WHERE o.offerid IN(SELECT b.offerid from booking b WHERE b.username = '$username')";
+					$result = pg_query($query);
+					
+					while($row = pg_fetch_array($result)){
+						$from = $row[1];
+						$to = $row[2];
+						$date = (string) $row[5];
+						$time = (string) $row[6];
+						$car = (string) $row[7];
+						
+						print "<tr><td class=\"col-md-2\">";
+						print "$date $time";
+						print "</td><td class=\"col-md-2\">";
+						print "$from";
+						print "</td><td class=\"col-md-2\">";
+						print "$to";
+						print "</td><td class=\"col-md-2\">";
+						print "$car";
+						print "</td></tr>";						
+					}
+				?>
               </tbody>
             </table></div>
 
