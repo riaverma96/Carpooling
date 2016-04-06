@@ -69,7 +69,7 @@ include('navbar.php');
 				<?php
 					$username = $login_session;
 					$date = date("Y-m-d");
-					$query = "SELECT * from creates_offer o WHERE o.numseatsremaining > 0 AND o.offerdate > '$date' AND o.usedcar IN(SELECT c.license from owns_car c WHERE c.cowner = '$username')";
+					$query = "SELECT * from creates_offer o WHERE o.numseatsremaining > 0 AND o.offerdate >= '$date' AND o.usedcar IN(SELECT c.license from owns_car c WHERE c.cowner = '$username')";
 					$result = pg_query($query);
 					
 					while($row = pg_fetch_array($result)){
@@ -77,7 +77,7 @@ include('navbar.php');
 						$to = $row[2];
 						$seats = (string) $row[4];
 						$date = (string) $row[5];
-						$time = (string) $row[6];
+						$time = str_pad((string) $row[6], 4, "0", STR_PAD_LEFT);
 						$car = (string) $row[7];
 						
 						print "<tr><td class=\"col-md-2\">";
@@ -114,14 +114,14 @@ include('navbar.php');
 				<?php
 					$username = $login_session;
 					$date = date("Y-m-d");
-					$query = "SELECT * from creates_offer o WHERE o.offerdate > '$date' AND o.offerid IN(SELECT b.offerid from booking b WHERE b.username = '$username')";
+					$query = "SELECT * from creates_offer o WHERE o.offerdate >= '$date' AND o.offerid IN(SELECT b.offerid from booking b WHERE b.username = '$username')";
 					$result = pg_query($query);
 					
 					while($row = pg_fetch_array($result)){
 						$from = $row[1];
 						$to = $row[2];
 						$date = (string) $row[5];
-						$time = (string) $row[6];
+						$time = str_pad((string) $row[6], 4, "0", STR_PAD_LEFT);
 						$car = (string) $row[7];
 						
 						print "<tr><td class=\"col-md-2\">";

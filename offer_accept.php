@@ -53,7 +53,7 @@ include('navbar.php');
 						print "</td><td>";
 						print (string) $row[5];
 						print "</td><td>";
-						print str_pad((string) $row[6], 4, STR_PAD_LEFT);
+						print str_pad((string) $row[6], 4, "0", STR_PAD_LEFT);
 						print "</td><td>";
 						print $row[7];
 						print "</td><td>";

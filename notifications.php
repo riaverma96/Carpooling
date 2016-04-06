@@ -1,5 +1,6 @@
 <?php
 include('session.php');
+include('navbar.php');
 ?>
 
 <html>
@@ -18,62 +19,58 @@ include('session.php');
 
 </head>
 
-
 <body>
-<?php
-$query = "SELECT COUNT(*)
-			FROM booking b
-			WHERE b.username = '$username'
-			AND b.isUserNotified = 'false'";
-$numNotifications = pg_query($query); 
-?>
-<div class="container">
-    <ul class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
-				<span class="sr-only">Toggle navigation</span>
-				<span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="http://127.0.0.1/main.php">CarPooling</a>
-        </div>
-        <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-				<li><a href="http://127.0.0.1/main.php">Home</a></li>
-				<li><a href="http://127.0.0.1/offer_create.php">Offer Ride</a></li>
-                <li><a href="http://127.0.0.1/offer_accept.php">Book a Ride</a></li>
-				<li><a href="http://127.0.0.1/req_create.php">Request Ride</a></li>
-				<li><a href="http://127.0.0.1/search.php"><span class="glyphicon glyphicon-search"></span> Search</a></li>
-                <li><a href="http://127.0.0.1/search_users.php"><span class="glyphicon glyphicon-search"></span> Search Users</a></li>
-			</ul>
-			<ul class="nav navbar-nav navbar-right">
-				<li class="dropdown" style="cursor:pointer;">
-					<a class="dropdown-toggle" data-toggle="dropdown">
-						<span class="glyphicon glyphicon-user"></span> 
-						<?php echo $login_session; ?> 
-						<span class="badge">
-						<?php if (is_null($numNotifications[0])) {
-								print '0';
-							} else {
-								print $numNotifications[0];
-							} ?> </span>
-					<ul class="dropdown-menu">
-						<li><a href="http://127.0.0.1/set_profile.php">Set Profile</a></li>
-						<li><a href="http://127.0.0.1/notifications.php">Notifications</a></li>
-					</ul>
-				</li>
-				<li>
-					<a href="http://127.0.0.1/logout.php">
-					<span class="glyphicon glyphicon-log-out"></span> Logout
-					</a>
-				</li>
-            </ul>
-        </div>
-    </div>
-	</ul>
-</div>
-<div class = "container" style = "margin-top:70px;">
-<h2>STUB PAGE FOR NOTIFICATIONS</h2>
-</div>
+<h2>New bookings since your last login:</h2>
+
+	<div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th class="col-md-2">OfferID</th>
+                  <th class="col-md-2">Date/Time</th>
+                  <th class="col-md-2">From</th>
+				  <th class="col-md-2">To</th>
+				  <th class="col-md-2">Car</th>
+				  <th class="col-md-2">Passenger's Name</th>
+				  <th class="col-md-2">Passenger's Email</th>
+                </tr>
+              </thead>
+              <tbody>
+				<?php
+					$username = $login_session;
+					$query = "SELECT o.offerid, o.offerdate, o.offertime, o.fromwhere, o.towhere, o.usedcar, u2.name, u2.email FROM creates_offer o, booking b, users u1, users u2 WHERE b.isusernotified = false AND b.offerid = o.offerid AND b.username = u2.name AND o.usedcar IN(SELECT c.license FROM owns_car c WHERE c.cowner = u1.name AND u1.name = '$username')"; 
+					$result = pg_query($query);
+					
+					while($row = pg_fetch_array($result)){
+						$id = $row[0];
+						$date = (string) $row[1];
+						$time = str_pad((string) $row[6], 4, "0", STR_PAD_LEFT);
+						$from = $row[3];
+						$to = $row[4];
+						$car = (string) $row[5];
+						$passenger = $row[6];
+						$email = $row[7];
+						
+						print "<tr><td class=\"col-md-2\">";
+						print "$id";
+						print "</td><td class=\"col-md-2\">";
+						print "$date $time";
+						print "</td><td class=\"col-md-2\">";
+						print "$from";
+						print "</td><td class=\"col-md-2\">";
+						print "$to";
+						print "</td><td class=\"col-md-2\">";
+						print "$car";
+						print "</td><td class=\"col-md-2\">";
+						print "$passenger";
+						print "</td><td class=\"col-md-2\">";
+						print "$email";
+						print "</td></tr>";
+						
+					}
+				?>
+              </tbody>
+            </table>
+          </div>
 </body>
 </html>
