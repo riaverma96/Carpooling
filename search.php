@@ -155,7 +155,7 @@ include('navbar.php');
             $cI = $_GET['car'];
             $sI = $_GET['start'];
             $eI = $_GET['destination'];
-            $dI = $_GET['day'];
+            $dI = str_pad($_GET['day'], 4, "0", STR_PAD_LEFT);
 
             $query = "SELECT * FROM ".$getType." "; 
 
