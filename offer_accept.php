@@ -96,7 +96,7 @@ include('session.php');
 						print "</td><td>";
 						print (string) $row[5];
 						print "</td><td>";
-						print (string) $row[6];
+						print str_pad((string) $row[6], 4, STR_PAD_LEFT);
 						print "</td><td>";
 						print $row[7];
 						print "</td><td>";
