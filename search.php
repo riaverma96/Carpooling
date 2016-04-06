@@ -8,7 +8,7 @@ include ('session.php');
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-    <title> Search-</title>
+    <title> Search</title>
   </head>
 
   <body>
@@ -258,32 +258,45 @@ include ('session.php');
             // echo "<b>SQL:   </b>".$query."<br><br>";
             $result = pg_query($query) or die('Query failed: ' . pg_last_error());
             echo "<table border=\"1\" >
-            <col width=\"10%\">
-            <col width=\"30%\">
-            <col width=\"30%\">
-            <col width=\"10%\">
             <col width=\"5%\">
+            <col width=\"25%\">
+            <col width=\"25%\">
+            <col width=\"10%\">
             <col width=\"15%\">
+            <col width=\"20%\">
             <tr>
             <th>ID</th>
+            <th>Start Point</th>
+            <th>End Point</th>
+            <th>Seats Available</th>
             <th>Date</th>
-            <th>Start Location</th>
-            <th>Destination</th>
-            <th>Car</th>
-            <th>Driver</th>
+            <th>Time</th>
             </tr>";
 
-
-            while ($row = pg_fetch_row($result)){
-              echo "<tr>";
-              echo "<td>" . $row[0] . "</td>";
-              echo "<td>" . $row[1] . "</td>";
-              echo "<td>" . $row[2] . "</td>";
-              echo "<td>" . $row[3] . "</td>";
-              echo "<td>" . $row[4] . "</td>"; 
-              echo "<td>" . $row[5] . "</td>";
-              echo "</tr>";
+            if ($getType == "creates_offer") {
+              while ($row = pg_fetch_row($result)){
+                echo "<tr>";
+                echo "<td>" . $row[0] . "</td>";
+                echo "<td>" . $row[1] . "</td>";
+                echo "<td>" . $row[2] . "</td>";
+                echo "<td>" . $row[4] . "</td>";
+                echo "<td>" . $row[5] . "</td>"; 
+                echo "<td>" . $row[6] . "</td>";
+                echo "</tr>";
+              } 
+            } else {
+              while ($row = pg_fetch_row($result)){
+                echo "<tr>";
+                echo "<td>" . $row[0] . "</td>";
+                echo "<td>" . $row[1] . "</td>";
+                echo "<td>" . $row[2] . "</td>";
+                echo "<td>" . $row[3] . "</td>";
+                echo "<td>" . $row[4] . "</td>"; 
+                echo "<td>" . $row[5] . "</td>";
+                echo "</tr>";
+              }
             }
+            
             echo "</table>";
             
             pg_free_result($result);
