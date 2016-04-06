@@ -1,10 +1,4 @@
 <?php
-// This part is used if running without needing to login.
-// To change to include session.php if login is required.
-$db = include 'postgresconnect.php';
-?>
-
-<?php
 	$todayDate = date('Y-m-d');
 	// Delete from booking table first.
 	$query = "DELETE FROM booking b WHERE b.offerid IN (
@@ -26,20 +20,3 @@ $db = include 'postgresconnect.php';
         return;
     }
 ?>
-
-<html>
-	<head>
-		<title> Removed Outdated offers/bookings </title>
-	</head>
-	
-	<body>
-		<div> 
-			<p>
-				There are no more outdated entries left in offers and booking.
-			</p>
-			<p>
-				<a href="http://127.0.0.1/main.php">Back to Home</a>
-			</p>
-		</div>
-	</body>
-</html>
