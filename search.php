@@ -150,42 +150,48 @@ include('navbar.php');
               $qseat = "numseatsremaining";
             } else {
               $qseat = "numseatswanted";  
-            }    
+            } 
+			$qdate = "rdate";
+            if ($getType == "creates_offer") {
+              $qdate = "offerdate";
+            } else {
+              $qdate = "rdate";  
+            }   			
 
             $cI = $_GET['car'];
             $sI = $_GET['start'];
             $eI = $_GET['destination'];
-            $dI = str_pad($_GET['day'], 4, "0", STR_PAD_LEFT);
+            $dI = $_GET['day'];
 
             $query = "SELECT * FROM ".$getType." "; 
 
             // None Of The Fields Are Empty (1)
             if ($cI != "" && $sI != "" && $eI != "" && $dI != "") {
-              $query = "SELECT * FROM ".$getType." WHERE ".$qseat." = '".$_GET['car']."' AND fromwhere='".$_GET['start']."' AND towhere='".$_GET['destination']."' AND rdate= '".$_GET['day']."' ";
+              $query = "SELECT * FROM ".$getType." WHERE ".$qseat." = '".$_GET['car']."' AND fromwhere='".$_GET['start']."' AND towhere='".$_GET['destination']."' AND ".$qdate." = '".$_GET['day']."' ";
             }
 
             // Only One Field Is Empty (4)
             if ($cI == "" && $sI != "" && $eI != "" && $dI != "") {
-              $query = "SELECT * FROM ".$getType." WHERE fromwhere='".$_GET['start']."' AND towhere='".$_GET['destination']."' AND rdate= '".$_GET['day']."' ";
+              $query = "SELECT * FROM ".$getType." WHERE fromwhere='".$_GET['start']."' AND towhere='".$_GET['destination']."' AND ".$qdate." = '".$_GET['day']."' ";
             } else if ($cI != "" && $sI == "" && $eI != "" && $dI != "") {
-              $query = "SELECT * FROM ".$getType." WHERE ".$qseat." = '".$_GET['car']."' AND towhere='".$_GET['destination']."' AND rdate= '".$_GET['day']."' ";
+              $query = "SELECT * FROM ".$getType." WHERE ".$qseat." = '".$_GET['car']."' AND towhere='".$_GET['destination']."' AND ".$qdate." = '".$_GET['day']."' ";
             } else if ($cI != "" && $sI != "" && $eI == "" && $dI != "") {
-              $query = "SELECT * FROM ".$getType." WHERE ".$qseat." = '".$_GET['car']."' AND fromwhere='".$_GET['start']."' AND rdate= '".$_GET['day']."' ";
+              $query = "SELECT * FROM ".$getType." WHERE ".$qseat." = '".$_GET['car']."' AND fromwhere='".$_GET['start']."' AND ".$qdate." = '".$_GET['day']."' ";
             } else if ($cI != "" && $sI != "" && $eI != "" && $dI == "") {
               $query = "SELECT * FROM ".$getType." WHERE ".$qseat." = '".$_GET['car']."' AND fromwhere='".$_GET['start']."' AND towhere='".$_GET['destination']."' ";
             } 
 
             // Two Fields Are Empty (6)
             if ($cI == "" && $sI == "" && $eI != "" && $dI != "") {
-              $query = "SELECT * FROM ".$getType." WHERE towhere='".$_GET['destination']."' AND rdate= '".$_GET['day']."' ";
+              $query = "SELECT * FROM ".$getType." WHERE towhere='".$_GET['destination']."' AND ".$qdate." = '".$_GET['day']."' ";
             } else if ($cI == "" && $sI != "" && $eI == "" && $dI != "") {
-              $query = "SELECT * FROM ".$getType." WHERE fromwhere='".$_GET['start']."' AND rdate= '".$_GET['day']."' ";
+              $query = "SELECT * FROM ".$getType." WHERE fromwhere='".$_GET['start']."' AND ".$qdate." = '".$_GET['day']."' ";
             } else if ($cI == "" && $sI != "" && $eI != "" && $dI == "") {
               $query = "SELECT * FROM ".$getType." WHERE fromwhere='".$_GET['start']."' AND towhere='".$_GET['destination']."' ";
             } 
 
             if ($cI != "" && $sI == "" && $eI == "" && $dI != "") {
-              $query = "SELECT * FROM ".$getType." WHERE ".$qseat." = '".$_GET['car']."' AND rdate= '".$_GET['day']."' ";
+              $query = "SELECT * FROM ".$getType." WHERE ".$qseat." = '".$_GET['car']."' AND ".$qdate." = '".$_GET['day']."' ";
             } else if ($cI != "" && $sI == "" && $eI != "" && $dI == "") {
               $query = "SELECT * FROM ".$getType." WHERE ".$qseat." = '".$_GET['car']."' AND towhere='".$_GET['destination']."' ";
             }
@@ -196,7 +202,7 @@ include('navbar.php');
 
             // Three Fields Are Empty (4)
             if ($cI == "" && $sI == "" && $eI == "" && $dI != "") {
-              $query = "SELECT * FROM ".$getType." WHERE rdate= '".$_GET['day']."' ";
+              $query = "SELECT * FROM ".$getType." WHERE ".$qdate." = '".$_GET['day']."' ";
             } else if ($cI == "" && $sI == "" && $eI != "" && $dI == "") {
               $query = "SELECT * FROM ".$getType." WHERE towhere='".$_GET['destination']."' ";
             } else if ($cI == "" && $sI != "" && $eI == "" && $dI == "") {
@@ -238,7 +244,7 @@ include('navbar.php');
                 echo "<td>" . $row[2] . "</td>";
                 echo "<td>" . $row[4] . "</td>";
                 echo "<td>" . $row[5] . "</td>"; 
-                echo "<td>" . $row[6] . "</td>";
+                echo "<td>" . str_pad($row[6], 4, "0", STR_PAD_LEFT) . "</td>";
                 echo "</tr>";
               } 
             } else {
@@ -249,7 +255,7 @@ include('navbar.php');
                 echo "<td>" . $row[2] . "</td>";
                 echo "<td>" . $row[3] . "</td>";
                 echo "<td>" . $row[4] . "</td>"; 
-                echo "<td>" . $row[5] . "</td>";
+                echo "<td>" . str_pad($row[5], 4, "0", STR_PAD_LEFT) . "</td>";
                 echo "</tr>";
               }
             }
