@@ -1,5 +1,5 @@
 <?php
-$title = offer;
+$title = 'offer';
 include('session.php');
 ?>
 

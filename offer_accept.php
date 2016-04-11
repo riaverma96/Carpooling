@@ -1,5 +1,5 @@
 <?php
-$title = accept;
+$title = 'accept';
 include('session.php');
 ?>
 
