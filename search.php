@@ -31,8 +31,8 @@ include('navbar.php');
             <p>
               <label class="col-sm-2 control-label">Type:</label>
               <select name="type"> <option value=""> Pick Ride Type: </option>
-                  <option value="offer" <?php if($type == 'offer') { ?> selected <?php } ?> >offers</option>
-                  <option value="request" <?php if($type == 'request') { ?> selected <?php } ?> >request</option>
+                  <option value="offer" <?php if($_GET['type'] == 'offer') { echo ' selected="selected"'; } ?> >offers</option>
+                  <option value="request" <?php if($_GET['type'] == 'request') { echo ' selected="selected"'; } ?> >request</option>
               </select>
             </p>
 
