@@ -69,7 +69,7 @@ include('navbar.php');
 				<?php
 					$username = $login_session;
 					$date = date("Y-m-d");
-					$query = "SELECT * from creates_offer o WHERE o.numseatsremaining > 0 AND o.offerdate >= '$date' AND o.usedcar IN(SELECT c.license from owns_car c WHERE c.cowner = '$username')";
+					$query = "SELECT * from creates_offer o WHERE o.offerdate >= '$date' AND o.usedcar IN(SELECT c.license from owns_car c WHERE c.cowner = '$username')";
 					$result = pg_query($query);
 					
 					while($row = pg_fetch_array($result)){
